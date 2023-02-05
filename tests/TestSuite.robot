@@ -14,6 +14,10 @@ Task 1:Create Transaction
     ${res}   Make post call and return Response        /transaction   ${user_body}
     ${json_res}    set variable   ${res.json()}
     should be equal as strings   ${res.status_code}   200
+    should be equal as strings   ${json_res["sentCoinAmount"]}   ${amt1}
+    should be equal as strings   ${json_res["receivedCoinAmount"]}    ${amt2}
+    should be equal as strings   ${json_res["sentCoin"]}   INR
+    should be equal as strings   ${json_res["receivedCoin"]}    USTD
     ${id}   set variable   ${json_res["id"]}
     set suite variable   ${id}
 
@@ -26,4 +30,7 @@ Task 2 : Get Transaction details
     should be equal as strings   ${tran_json["receivedCoinAmount"]}    ${amt2}
     should be equal as strings   ${tran_json["sentCoin"]}   INR
     should be equal as strings   ${tran_json["receivedCoin"]}    USTD
+    ${amt3}   return_divided_value   ${amt1}     ${amt2}
+    should be equal as strings   ${tran_json["receivedCoinMarketPrice"]}     ${amt3}
+
 
