@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.1.3 (Python 3.7.3 on win32)" generated="20230205 19:40:39.907" rpa="false" schemaversion="2">
+<suite id="s1" name="Tests" source="C:\Users\vinot\PycharmProjects\Koinx_Project\tests">
+<suite id="s1-s1" name="TestSuite" source="C:\Users\vinot\PycharmProjects\Koinx_Project\tests\TestSuite.robot">
+<test id="s1-s1-t1" name="Task 1:Create Transaction">
+<kw name="Get Random Number" library="api_functions">
+<var>${amt1}</var>
+<msg timestamp="20230205 19:40:40.213" level="INFO">${amt1} = 18473</msg>
+<status status="PASS" starttime="20230205 19:40:40.213" endtime="20230205 19:40:40.213"/>
+</kw>
+<kw name="Get Random Number" library="api_functions">
+<var>${amt2}</var>
+<msg timestamp="20230205 19:40:40.213" level="INFO">${amt2} = 68928</msg>
+<status status="PASS" starttime="20230205 19:40:40.213" endtime="20230205 19:40:40.213"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${amt1}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20230205 19:40:40.213" level="INFO">${amt1} = 18473</msg>
+<status status="PASS" starttime="20230205 19:40:40.213" endtime="20230205 19:40:40.213"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${amt2}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20230205 19:40:40.228" level="INFO">${amt2} = 68928</msg>
+<status status="PASS" starttime="20230205 19:40:40.228" endtime="20230205 19:40:40.228"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${user_body}</var>
+<arg>SEPARATOR=</arg>
+<arg>{"coin1": "INR","coin2":"USTD","coin1Amount":${amt1},</arg>
+<arg>"coin2Amount":${amt2}</arg>
+<arg>}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230205 19:40:40.229" level="INFO">${user_body} = {"coin1": "INR","coin2":"USTD","coin1Amount":18473,"coin2Amount":68928}</msg>
+<status status="PASS" starttime="20230205 19:40:40.229" endtime="20230205 19:40:40.229"/>
+</kw>
+<kw name="Make post call and return Response" library="API_keywords">
+<var>${res}</var>
+<arg>/transaction</arg>
+<arg>${user_body}</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>create_tran</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230205 19:40:40.229" level="INFO">Creating Session using : alias=create_tran, url=https://x8ki-letl-twmt.n7.xano.io/api:gHPd8le5, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230205 19:40:40.229" endtime="20230205 19:40:40.229"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${tran_res}</var>
+<arg>create_tran</arg>
+<arg>${uri}</arg>
+<arg>data=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20230205 19:40:41.396" level="INFO">POST Request : url=https://x8ki-letl-twmt.n7.xano.io/api:gHPd8le5/transaction 
+ path_url=/api:gHPd8le5/transaction 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '71'} 
+ body={"coin1": "INR","coin2":"USTD","coin1Amount":18473,"coin2Amount":68928} 
+ </msg>
+<msg timestamp="20230205 19:40:41.396" level="INFO">POST Response : url=https://x8ki-letl-twmt.n7.xano.io/api:gHPd8le5/transaction 
+ status=200, reason=OK 
+ headers={'Date': 'Sun, 05 Feb 2023 14:10:27 GMT', 'Content-Type': 'application/json; charset=UTF-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Set-Cookie': 'XNS=69f9a52a7c75f704dd5c16a8facf18c1|a0d48ac8832118bb024e4ec89ef69405; Path=/socket/; Secure; HttpOnly; SameSite=Strict', 'X-XSS-Protection': '1; mode=block', 'Cache-Control': 'private, no-cache, no-store, must-revalidate', 'Pragma': 'no-cache', 'Expires': 'Thu, 07 Feb 2013 14:10:27 GMT', 'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'deny', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT, PATCH, OPTIONS, HEAD', 'Access-Control-Allow-Headers': '*', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Max-Age': '86400', 'X-App': 'hit', 'Content-Encoding': 'gzip', 'Strict-Transport-Security': 'max-age=15724800; includeSubDomains'} 
+ body={"id":142,"created_at":1675606227389,"sentCoin":"INR","receivedCoin":"USTD","sentCoinAmount":18473,"receivedCoinAmount":68928} 
+ </msg>
+<msg timestamp="20230205 19:40:41.396" level="INFO">c:\python\python37\lib\site-packages\urllib3\connectionpool.py:1020: InsecureRequestWarning: Unverified HTTPS request is being made to host 'x8ki-letl-twmt.n7.xano.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20230205 19:40:41.396" level="INFO">${tran_res} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230205 19:40:40.229" endtime="20230205 19:40:41.396"/>
+</kw>
+<msg timestamp="20230205 19:40:41.396" level="INFO">${res} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230205 19:40:40.229" endtime="20230205 19:40:41.396"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${json_res}</var>
+<arg>${res.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230205 19:40:41.396" level="INFO">${json_res} = {'id': 142, 'created_at': 1675606227389, 'sentCoin': 'INR', 'receivedCoin': 'USTD', 'sentCoinAmount': 18473, 'receivedCoinAmount': 68928}</msg>
+<status status="PASS" starttime="20230205 19:40:41.396" endtime="20230205 19:40:41.396"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${res.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230205 19:40:41.411" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20230205 19:40:41.396" endtime="20230205 19:40:41.411"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${json_res["id"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230205 19:40:41.411" level="INFO">${id} = 142</msg>
+<status status="PASS" starttime="20230205 19:40:41.411" endtime="20230205 19:40:41.411"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${id}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20230205 19:40:41.411" level="INFO">${id} = 142</msg>
+<status status="PASS" starttime="20230205 19:40:41.411" endtime="20230205 19:40:41.411"/>
+</kw>
+<doc>This test case will create new transaction</doc>
+<status status="PASS" starttime="20230205 19:40:40.213" endtime="20230205 19:40:41.411"/>
+</test>
+<test id="s1-s1-t2" name="Task 2 : Get Transaction details">
+<kw name="Get Transaction Details and return response" library="API_keywords">
+<var>${tran_details}</var>
+<arg>/transaction/${id}</arg>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>get_tran</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230205 19:40:41.411" level="INFO">Creating Session using : alias=get_tran, url=https://x8ki-letl-twmt.n7.xano.io/api:gHPd8le5, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230205 19:40:41.411" endtime="20230205 19:40:41.411"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${get_res}</var>
+<arg>get_tran</arg>
+<arg>${uri}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20230205 19:40:42.545" level="INFO">GET Request : url=https://x8ki-letl-twmt.n7.xano.io/api:gHPd8le5/transaction/142 
+ path_url=/api:gHPd8le5/transaction/142 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20230205 19:40:42.545" level="INFO">GET Response : url=https://x8ki-letl-twmt.n7.xano.io/api:gHPd8le5/transaction/142 
+ status=200, reason=OK 
+ headers={'Date': 'Sun, 05 Feb 2023 14:10:28 GMT', 'Content-Type': 'application/json; charset=UTF-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Set-Cookie': 'XNS=69f9a52a7c75f704dd5c16a8facf18c1|a0d48ac8832118bb024e4ec89ef69405; Path=/socket/; Secure; HttpOnly; SameSite=Strict', 'X-XSS-Protection': '1; mode=block', 'Cache-Control': 'private, no-cache, no-store, must-revalidate', 'Pragma': 'no-cache', 'Expires': 'Thu, 07 Feb 2013 14:10:28 GMT', 'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'deny', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT, PATCH, OPTIONS, HEAD', 'Access-Control-Allow-Headers': '*', 'Access-Control-Allow-Credentials': 'true', 'Access-Control-Max-Age': '86400', 'X-App': 'hit', 'Content-Encoding': 'gzip', 'Strict-Transport-Security': 'max-age=15724800; includeSubDomains'} 
+ body={"id":142,"created_at":1675606227389,"sentCoin":"INR","receivedCoin":"USTD","sentCoinAmount":18473,"receivedCoinAmount":68928,"receivedCoinMarketPrice":0.26800429433611883} 
+ </msg>
+<msg timestamp="20230205 19:40:42.545" level="INFO">c:\python\python37\lib\site-packages\urllib3\connectionpool.py:1020: InsecureRequestWarning: Unverified HTTPS request is being made to host 'x8ki-letl-twmt.n7.xano.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,</msg>
+<msg timestamp="20230205 19:40:42.545" level="INFO">${get_res} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230205 19:40:41.411" endtime="20230205 19:40:42.545"/>
+</kw>
+<msg timestamp="20230205 19:40:42.545" level="INFO">${tran_details} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20230205 19:40:41.411" endtime="20230205 19:40:42.545"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${tran_json}</var>
+<arg>${tran_details.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230205 19:40:42.545" level="INFO">${tran_json} = {'id': 142, 'created_at': 1675606227389, 'sentCoin': 'INR', 'receivedCoin': 'USTD', 'sentCoinAmount': 18473, 'receivedCoinAmount': 68928, 'receivedCoinMarketPrice': 0.26800429433611883}</msg>
+<status status="PASS" starttime="20230205 19:40:42.545" endtime="20230205 19:40:42.545"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${tran_details.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230205 19:40:42.545" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20230205 19:40:42.545" endtime="20230205 19:40:42.545"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${tran_json["id"]}</arg>
+<arg>${id}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230205 19:40:42.545" endtime="20230205 19:40:42.545"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${tran_json["sentCoinAmount"]}</arg>
+<arg>${amt1}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230205 19:40:42.545" endtime="20230205 19:40:42.545"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${tran_json["receivedCoinAmount"]}</arg>
+<arg>${amt2}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230205 19:40:42.545" endtime="20230205 19:40:42.545"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${tran_json["sentCoin"]}</arg>
+<arg>INR</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230205 19:40:42.545" endtime="20230205 19:40:42.545"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${tran_json["receivedCoin"]}</arg>
+<arg>USTD</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20230205 19:40:42.561" endtime="20230205 19:40:42.561"/>
+</kw>
+<status status="PASS" starttime="20230205 19:40:41.411" endtime="20230205 19:40:42.561"/>
+</test>
+<status status="PASS" starttime="20230205 19:40:40.001" endtime="20230205 19:40:42.561"/>
+</suite>
+<status status="PASS" starttime="20230205 19:40:39.969" endtime="20230205 19:40:42.561"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="2" fail="0" skip="0" id="s1" name="Tests">Tests</stat>
+<stat pass="2" fail="0" skip="0" id="s1-s1" name="TestSuite">Tests.TestSuite</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
